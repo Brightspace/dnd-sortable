@@ -1,0 +1,88 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-colors/d2l-colors-html.html">
+
+<script src="../Sortable/Sortable.js"></script>
+
+<!--
+`d2l-dnd-sortable`
+Reorderable drag-and-drop lists
+@demo demo/index.html
+-->
+
+<dom-module id="d2l-dnd-sortable">
+	<template strip-whitespace>
+		<style>
+
+			::slotted(.placeholder) {
+				opacity: 0;
+			}
+
+		</style>
+		<!-- NOTE: You cannot add any local DOM around the slot otherwise it breaks the SortableJS dom
+		manipulation of the distributed light DOM children which with shadow DOM will always have the custom
+		element as their parent node.
+		-->
+		<slot></slot>
+	</template>
+	<script>
+		Polymer({
+			is: 'd2l-dnd-sortable',
+			properties: {
+				placeholderClass: {
+					type: String,
+					value: 'placeholder',
+					observer: '_placeholderClassChanged'
+				},
+				mirrorClass: {
+					type: String,
+					value: 'mirror',
+					observer: '_mirrorClassChanged'
+				},
+				touchMirrorClass: {
+					type: String,
+					value: 'touch-mirror',
+					observer: '_touchMirrorClassChanged'
+				},
+				handle: {
+					type: String,
+					value: '',
+					observer: '_handleChanged'
+				}
+			},
+
+			attached: function() {
+				var options = {
+					ghostClass: this.placeholderClass,
+					dragClass: this.mirrorClass,
+					fallbackClass: this.touchMirrorClass,
+					handle: this.handle
+				};
+
+				this.sortable = window.Sortable.create(this, options);
+			},
+
+			detached: function() {
+				if (this.sortable) {
+					this.sortable.destroy();
+				}
+			},
+
+			_placeholderClassChanged: function(value) {
+				this.sortable && this.sortable.option('ghostClass', value);
+			},
+
+			_mirrorClassChanged: function(value) {
+				this.sortable && this.sortable.option('dragClass', value);
+			},
+
+			_touchMirrorClassChanged: function(value) {
+				this.sortable && this.sortable.option('fallbackClass', value);
+			},
+
+			_handleChanged: function(value) {
+				this.sortable && this.sortable.option('handle', value);
+			},
+
+		});
+	</script>
+</dom-module>

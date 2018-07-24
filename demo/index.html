@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+		<title>d2l-dnd-sortable demo</title>
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+		<link rel="import" href="../../d2l-typography/d2l-typography.html">
+		<link rel="import" href="../../d2l-textarea/d2l-textarea.html">
+		<link rel="import" href="../d2l-dnd-sortable.html">
+		<custom-style>
+			<style is="custom-style" include="demo-pages-shared-styles"></style>
+		</custom-style>
+		<custom-style include="d2l-typography">
+			<style is="custom-style" include="d2l-typography"></style>
+		</custom-style>
+		<style>
+			html {
+				font-size: 20px;
+			}
+
+			li {
+				list-style: none;
+				margin-bottom: 10px;
+			}
+
+			.drag-handle {
+				display: inline-block;
+				width: 40px;
+				height: 40px;
+				text-align: center;
+				cursor: move;
+			}
+		</style>
+	</head>
+	<body unresolved class="d2l-typography">
+		<div class="vertical-section-container centered">
+			<h3>Simple list</h3>
+			<demo-snippet>
+				<template>
+					<ul style="position:relative">
+						<d2l-dnd-sortable>
+							<li>One, Two, Three, Four, Five, Once I caught a fish alive</li>
+							<li>Six, Seven, Eight, Nine, Ten, Then I let him go again</li>
+							<li>Why did you let him go</li>
+							<li>Because he bit my finger so</li>
+						</d2l-dnd-sortable>
+					</ul>
+				</template>
+			</demo-snippet>
+		</div>
+		<div class="vertical-section-container centered">
+			<h3>Simple list with drag handle</h3>
+			<demo-snippet>
+				<template>
+					<ul style="position:relative">
+						<d2l-dnd-sortable handle=".drag-handle">
+							<li><span class="drag-handle">↕</span>One, Two, Three, Four, Five, Once I caught a fish alive</li>
+							<li><span class="drag-handle">↕</span>Six, Seven, Eight, Nine, Ten, Then I let him go again</li>
+							<li><span class="drag-handle">↕</span>Why did you let him go</li>
+							<li><span class="drag-handle">↕</span>Because he bit my finger so</li>
+						</d2l-dnd-sortable>
+					</ul>
+				</template>
+			</demo-snippet>
+		</div>
+		<div class="vertical-section-container centered">
+			<h3>dom-repeat</h3>
+			<demo-snippet>
+				<template>
+					<ul>
+						<d2l-dnd-sortable>
+							<dom-bind class="dom-repeat-demo-2">
+								<template is="dom-bind" class="dom-repeat-demo-1">
+									<template is="dom-repeat" items=[[phrases]]>
+										<li>[[item.value]]</li>
+									</template>
+								</template>
+							</dom-bind>
+						</d2l-dnd-sortable>
+					</ul>
+				</template>
+			</demo-snippet>
+		</div>
+		<div class="vertical-section-container centered">
+			<h3>Nested web components</h3>
+			<demo-snippet>
+				<template>
+					<d2l-dnd-sortable>
+						<dom-bind class="dom-repeat-demo-2">
+							<template is="dom-bind" class="dom-repeat-demo-1">
+								<template is="dom-repeat" items=[[phrases]]>
+									<div><d2l-textarea value="[[item.value]]"></d2l-textarea></div>
+								</template>
+							</template>
+						</dom-bind>
+					</d2l-dnd-sortable>
+				</template>
+			</demo-snippet>
+		</div>
+
+		<script>
+			window.addEventListener('WebComponentsReady', function() {
+				// imports are loaded and elements have been registered
+				var domBind = document.querySelectorAll(Polymer.Element ? '.dom-repeat-demo-2' : '.dom-repeat-demo-1');
+				domBind.forEach(function(el) {
+					el.phrases = [
+						{
+							value: 'One, Two Three, Four Five, Once I caught a fish alive'
+						}, {
+							value: 'Six, Seven, Eight, Nine, Ten, Then I let him go again'
+						}
+					];
+				});
+			});
+		</script>
+	</body>
+</html>

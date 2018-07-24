@@ -9,7 +9,7 @@ Reorderable drag-and-drop lists
 
 `d2l-dnd-sortable` can be installed from [Bower][bower-url]:
 ```shell
-bower install d2l-dnd-sortable
+bower install Brightspace/d2l-dnd-sortable
 ```
 
 ## Usage
@@ -44,8 +44,30 @@ Include the [webcomponents.js](http://webcomponents.org/polyfills/) "lite" polyf
 </custom-element-demo>
 ```
 -->
+Simple div elements
+
 ```html
-<d2l-dnd-sortable>My element</d2l-dnd-sortable>
+<d2l-dnd-sortable>
+	<div>One</div>
+	<div>Two</div>
+	<div>Three</div>
+</d2l-dnd-sortable>
+```
+
+With a dom-repeat and overridding some of the styling classes to style
+the placeholder when an item is dragged, and the mirror of the dragged item.
+
+```html
+<d2l-dnd-sortable
+	placeholder-class="dnd-placeholder"
+	mirror-class="dnd-mirror"
+	touch-mirror-class="dnd-touch-mirror"
+	handle=".dnd-drag-handle"
+>
+	<template is="dom-repeat" items="[[_criteriaEntities]]" as="criterion">
+		<div>[[criterion.name]]</div>
+	</template>
+</d2l-dnd-sortable>
 ```
 
 ## Developing, Testing and Contributing

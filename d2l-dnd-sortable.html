@@ -59,6 +59,12 @@ Reorderable drag-and-drop lists
 					type: String,
 					value: '',
 					observer: '_handleChanged'
+				},
+				/** Specify whether sorting (drag and drop) is enabled */
+				disabled: {
+					type: Boolean,
+					value: false,
+					observer: '_disabledChanged'
 				}
 			},
 
@@ -68,6 +74,7 @@ Reorderable drag-and-drop lists
 					dragClass: this.mirrorClass,
 					fallbackClass: this.touchMirrorClass,
 					handle: this.handle,
+					disabled: this.disabled,
 					onUpdate: this._onUpdate.bind(this)
 				};
 
@@ -94,6 +101,10 @@ Reorderable drag-and-drop lists
 
 			_handleChanged: function(value) {
 				this.sortable && this.sortable.option('handle', value);
+			},
+
+			_disabledChanged: function(value) {
+				this.sortable && this.sortable.option('disabled', value);
 			},
 
 			_onUpdate: function(evt) {

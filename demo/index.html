@@ -53,16 +53,21 @@
 			</demo-snippet>
 		</div>
 		<div class="vertical-section-container centered">
-			<h3>Simple list with drag handle</h3>
+			<h3>Simple list with drag handle and enable/disable dragging</h3>
 			<demo-snippet>
 				<template>
 					<ul style="position:relative">
-						<d2l-dnd-sortable handle=".drag-handle">
-							<li><span class="drag-handle">↕</span>One, Two, Three, Four, Five, Once I caught a fish alive</li>
-							<li><span class="drag-handle">↕</span>Six, Seven, Eight, Nine, Ten, Then I let him go again</li>
-							<li><span class="drag-handle">↕</span>Why did you let him go</li>
-							<li><span class="drag-handle">↕</span>Because he bit my finger so</li>
-						</d2l-dnd-sortable>
+						<dom-bind>
+							<template is="dom-bind">
+								<d2l-dnd-sortable handle=".drag-handle" id="sortable1">
+									<li><span class="drag-handle">↕</span>One, Two, Three, Four, Five, Once I caught a fish alive</li>
+									<li><span class="drag-handle">↕</span>Six, Seven, Eight, Nine, Ten, Then I let him go again</li>
+									<li><span class="drag-handle">↕</span>Why did you let him go</li>
+									<li><span class="drag-handle">↕</span>Because he bit my finger so</li>
+								</d2l-dnd-sortable>
+								<button onclick="sortable1.disabled = !sortable1.disabled">Toggle Drag Drop Enabled</button>
+							</template>
+						</dom-bind>
 					</ul>
 				</template>
 			</demo-snippet>

@@ -27,21 +27,34 @@ Reorderable drag-and-drop lists
 		Polymer({
 			is: 'd2l-dnd-sortable',
 			properties: {
+
+				/**
+				 * Fired when the sortable list changes after a drag completes
+				 *
+				 * @event d2l-dnd-sorted
+				 * @param {number} oldIndex Original list index of dragged item
+				 * @param {number} newIndex New list index of dragged item
+				*/
+
+				/** CSS class name applied to the placeholder DOM node for the item being dragged */
 				placeholderClass: {
 					type: String,
 					value: 'placeholder',
 					observer: '_placeholderClassChanged'
 				},
+				/** CSS class name applied to the HTML 5 drag image of the item being dragged */
 				mirrorClass: {
 					type: String,
 					value: 'mirror',
 					observer: '_mirrorClassChanged'
 				},
+				/** CSS class name applied to the touch drag image of the item being dragged */
 				touchMirrorClass: {
 					type: String,
 					value: 'touch-mirror',
 					observer: '_touchMirrorClassChanged'
 				},
+				/** Specify a css selector for a handle element if you don't want to allow drag action on the entire element */
 				handle: {
 					type: String,
 					value: '',
@@ -54,7 +67,8 @@ Reorderable drag-and-drop lists
 					ghostClass: this.placeholderClass,
 					dragClass: this.mirrorClass,
 					fallbackClass: this.touchMirrorClass,
-					handle: this.handle
+					handle: this.handle,
+					onUpdate: this._onUpdate.bind(this)
 				};
 
 				this.sortable = window.Sortable.create(this, options);
@@ -82,6 +96,18 @@ Reorderable drag-and-drop lists
 				this.sortable && this.sortable.option('handle', value);
 			},
 
+			_onUpdate: function(evt) {
+				this.dispatchEvent(new CustomEvent(
+					'd2l-dnd-sorted', {
+						bubbles: true,
+						composed: true,
+						detail: {
+							oldIndex: evt.oldIndex,
+							newIndex: evt.newIndex
+						}
+					}
+				));
+			}
 		});
 	</script>
 </dom-module>

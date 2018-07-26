@@ -38,10 +38,11 @@
 	<body unresolved class="d2l-typography">
 		<div class="vertical-section-container centered">
 			<h3>Simple list</h3>
+			<h4>(see Dev Tools Inspector Console for events)</h4>
 			<demo-snippet>
 				<template>
 					<ul style="position:relative">
-						<d2l-dnd-sortable>
+						<d2l-dnd-sortable id="simple-sortable">
 							<li>One, Two, Three, Four, Five, Once I caught a fish alive</li>
 							<li>Six, Seven, Eight, Nine, Ten, Then I let him go again</li>
 							<li>Why did you let him go</li>
@@ -52,16 +53,21 @@
 			</demo-snippet>
 		</div>
 		<div class="vertical-section-container centered">
-			<h3>Simple list with drag handle</h3>
+			<h3>Simple list with drag handle and enable/disable dragging</h3>
 			<demo-snippet>
 				<template>
 					<ul style="position:relative">
-						<d2l-dnd-sortable handle=".drag-handle">
-							<li><span class="drag-handle">↕</span>One, Two, Three, Four, Five, Once I caught a fish alive</li>
-							<li><span class="drag-handle">↕</span>Six, Seven, Eight, Nine, Ten, Then I let him go again</li>
-							<li><span class="drag-handle">↕</span>Why did you let him go</li>
-							<li><span class="drag-handle">↕</span>Because he bit my finger so</li>
-						</d2l-dnd-sortable>
+						<dom-bind>
+							<template is="dom-bind">
+								<d2l-dnd-sortable handle=".drag-handle" id="sortable1">
+									<li><span class="drag-handle">↕</span>One, Two, Three, Four, Five, Once I caught a fish alive</li>
+									<li><span class="drag-handle">↕</span>Six, Seven, Eight, Nine, Ten, Then I let him go again</li>
+									<li><span class="drag-handle">↕</span>Why did you let him go</li>
+									<li><span class="drag-handle">↕</span>Because he bit my finger so</li>
+								</d2l-dnd-sortable>
+								<button onclick="sortable1.disabled = !sortable1.disabled">Toggle Drag Drop Enabled</button>
+							</template>
+						</dom-bind>
 					</ul>
 				</template>
 			</demo-snippet>
@@ -113,6 +119,16 @@
 							value: 'Six, Seven, Eight, Nine, Ten, Then I let him go again'
 						}
 					];
+				});
+
+				var nestedSortable = document.querySelector('#simple-sortable');
+				nestedSortable.addEventListener('d2l-dnd-sorted', function(e) {
+					// eslint-disable-next-line no-console
+					console.log({
+						'event': e.type,
+						'detail.oldIndex': e.detail.oldIndex,
+						'detail.newIndex': e.detail.newIndex
+					});
 				});
 			});
 		</script>

@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#1 - 2",
-    "Sortable": "sortablejs#8794188794eff5685ded3e5755fe8e9212ab994f"
+    "Sortable": "Brightspace/Sortable#1.6.0-bs1"
   },
   "devDependencies": {
     "d2l-typography": "BrightspaceUI/typography#^6.0.0",

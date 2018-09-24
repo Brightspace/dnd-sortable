@@ -8,7 +8,7 @@
 		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
 		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
 		<link rel="import" href="../../d2l-typography/d2l-typography.html">
-		<link rel="import" href="../../d2l-textarea/d2l-textarea.html">
+		<link rel="import" href="../../d2l-inputs/d2l-input-textarea.html">
 		<link rel="import" href="../d2l-dnd-sortable.html">
 		<custom-style>
 			<style is="custom-style" include="demo-pages-shared-styles"></style>
@@ -98,7 +98,7 @@
 						<dom-bind class="dom-repeat-demo-2">
 							<template is="dom-bind" class="dom-repeat-demo-1">
 								<template is="dom-repeat" items=[[phrases]]>
-									<div><d2l-textarea value="[[item.value]]"></d2l-textarea></div>
+									<div><d2l-input-textarea value="[[item.value]]"></d2l-input-textarea></div>
 								</template>
 							</template>
 						</dom-bind>

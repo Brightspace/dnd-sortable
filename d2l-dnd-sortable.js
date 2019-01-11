@@ -11,7 +11,7 @@ Reorderable drag-and-drop lists
 import '@polymer/polymer/polymer-legacy.js';
 
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
-import 'Sortable/Sortable.min.js';
+import 'sortablejs';
 const $_documentContainer = document.createElement('template');
 
 $_documentContainer.innerHTML = `<dom-module id="d2l-dnd-sortable">
@@ -29,7 +29,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-dnd-sortable">
 		-->
 		<slot></slot>
 	</template>
-	
+
 </dom-module>`;
 
 document.head.appendChild($_documentContainer.content);

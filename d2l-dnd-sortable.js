@@ -91,7 +91,7 @@ Polymer({
 	},
 
 	detached: function() {
-		if (this.sortable) {
+		if (this.sortable && this.sortable.el) {
 			this.sortable.destroy();
 		}
 	},
